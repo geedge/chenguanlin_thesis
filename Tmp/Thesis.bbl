@@ -1,0 +1,401 @@
+\begin{thebibliography}{57}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+  \urlstyle{same}\fi
+\providecommand{\href}[2]{\url{#2}}
+\providecommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+
+\bibitem[{CNNIC(2018)}]{CNNIC2018}
+CNNIC.
+\newblock 中国互联网络发展状况统计报告\allowbreak[R/OL].
+\newblock 2018.
+\newblock \url{http://www.cac.gov.cn/2018-08/20/c\_1123296882.htm}.
+
+\bibitem[{敖莉\ 等(2010)敖莉, 舒继武, and 李明强}]{aoli2010}
+敖莉, 舒继武, 李明强.
+\newblock 重复数据删除技术\allowbreak[J].
+\newblock 软件学报, 2010, 21\penalty0 (5):\penalty0 916-929.
+
+\bibitem[{Aggarwal {\bibetal}()Aggarwal, Akella, Anand, and
+  Balachandran}]{Aggarwal}
+AGGARWAL~B, AKELLA~A, ANAND~A, et~al.
+\newblock {EndRE : An End-System Redundancy Elimination Service for
+  Enterprises}\allowbreak[J].
+
+\bibitem[{Aggarwal {\bibetal}(2010)Aggarwal, Akella, Anand, Balachandran,
+  Chitnis, Muthukrishnan, Ramjee, and Varghese}]{Aggarwal2010EndRE}
+AGGARWAL~B, AKELLA~A, ANAND~A, et~al.
+\newblock Endre: An end-system redundancy elimination service for
+  enterprises.\allowbreak[J].
+\newblock 2010.
+
+\bibitem[{Anand {\bibetal}(2009)Anand, Muthukrishnan, Akella, and
+  Ramjee}]{Anand2009}
+ANAND~A, MUTHUKRISHNAN~C, AKELLA~A, et~al.
+\newblock {Redundancy in network traffic: findings and
+  implications}\allowbreak[J/OL].
+\newblock Proceedings of SIGMETRICS/Performance'09, 2009:\penalty0 37-48.
+\newblock \url{http://portal.acm.org/citation.cfm?id=1555355}.
+
+\bibitem[{Anand {\bibetal}(2010)Anand, Muthukrishnan, Kappes, Akella, and
+  Nath}]{Anand2010Cheap}
+ANAND~A, MUTHUKRISHNAN~C, KAPPES~S, et~al.
+\newblock Cheap and large cams for high performance data-intensive networked
+  systems\allowbreak[J].
+\newblock 2010.
+
+\bibitem[{Cao {\bibetal}(2017)Cao, Li, and Wijmans}]{Cao2017}
+CAO~Y, LI~S, WIJMANS~E.
+\newblock {( Cross- ) Browser Fingerprinting via OS and Hardware Level
+  Features}\allowbreak[J].
+\newblock Proceedings of Network {\&} Distributed System Security Symposium
+  (NDSS), 2017\penalty0 (March).
+
+\bibitem[{Chen {\bibetal}(2016{\natexlab{a}})Chen, Weaver, and Wan}]{Chen2016}
+CHEN~J, WEAVER~N, WAN~T.
+\newblock {Host of Troubles : Multiple Host Ambiguities in HTTP
+  Implementations}\allowbreak[J].
+\newblock Ccs, 2016:\penalty0 1516-1527.
+
+\bibitem[{Chen {\bibetal}(2008)Chen, Lu, and Lu}]{Chen2008Efficient}
+CHEN~L, LU~J, LU~Y.
+\newblock Efficient merging and filtering algorithms for approximate string
+  searches\allowbreak[C]//\allowbreak
+IEEE International Conference on Data Engineering.
+\newblock 2008.
+
+\bibitem[{Chen {\bibetal}(2016{\natexlab{b}})Chen, He, Hua, and
+  Wang}]{Chen2016a}
+CHEN~Y, HE~W, HUA~Y, et~al.
+\newblock {CompoundEyes: Near-duplicate detection in large scale online video
+  systems in the cloud}\allowbreak[J].
+\newblock Proceedings - IEEE INFOCOM, 2016, 2016-July.
+
+\bibitem[{Chung {\biband} Claypool(2018)Chung and Claypool}]{Chung2018}
+CHUNG~J~W, CLAYPOOL~M.
+\newblock {Silhoue e – Identifying YouTube Video Flows from Encrypted Tra
+  ic}\allowbreak[J].
+\newblock Nossdav 2018, 2018.
+
+\bibitem[{cisco(2018)}]{CiscoReport}
+CISCO.
+\newblock visual-networking-index-vni\allowbreak[R/OL].
+\newblock 2018.
+\newblock
+  \url{https://www.cisco.com/c/en/us/solutions/collateral/service-provider/visual-networking-index-vni/white-paper-c11-741490.html}.
+
+\bibitem[{Feng()}]{Feng}
+FENG~D.
+\newblock {Smart In-Network Deduplication for Storage-aware SDN}\allowbreak[J].
+\newblock :\penalty0 509-510.
+
+\bibitem[{Feng {\bibetal}(2013)Feng, Huang, Erman, Mao, Sen, and
+  Spatscheck}]{Feng2013How}
+FENG~Q, HUANG~J, ERMAN~J, et~al.
+\newblock How to reduce smartphone traffic volume by 30%?\allowbreak[J].
+\newblock 2013.
+
+\bibitem[{Ge {\bibetal}(2014)Ge, Liu, Du, Zhang, Guan, Chen, Zhao, and
+  Hu}]{Ge2014}
+GE~X, LIU~Y, DU~D~H, et~al.
+\newblock {OpenANFV}\allowbreak[J/OL].
+\newblock Proceedings of the 2014 ACM conference on SIGCOMM - SIGCOMM '14,
+  2014:\penalty0 353-354.
+\newblock \url{http://dl.acm.org/citation.cfm?doid=2619239.2631426}.
+
+\bibitem[{Halepovic {\bibetal}(2012)Halepovic, Ghaderi, and
+  Williamson}]{Halepovic2012}
+HALEPOVIC~E, GHADERI~M, WILLIAMSON~C.
+\newblock {On the performance of redundant traffic elimination in
+  WLANs}\allowbreak[J].
+\newblock IEEE International Conference on Communications, 2012:\penalty0
+  5434-5439.
+
+\bibitem[{Halepovic {\bibetal}(2013)Halepovic, Ghaderi, and
+  Williamson}]{Halepovic2013On}
+HALEPOVIC~E, GHADERI~M, WILLIAMSON~C.
+\newblock On the performance of redundant traffic elimination in
+  wlans\allowbreak[C]//\allowbreak
+IEEE International Conference on Communications.
+\newblock 2013.
+
+\bibitem[{Hao {\bibetal}(2016)Hao, Mu, Hong, Meng, and
+  Goulermas}]{Hao2016Stochastic}
+HAO~Y, MU~T, HONG~R, et~al.
+\newblock Stochastic multiview hashing for large-scale near-duplicate video
+  retrieval\allowbreak[J].
+\newblock IEEE Transactions on Multimedia, 2016, PP\penalty0 (99):\penalty0
+  1-1.
+
+\bibitem[{Hao {\bibetal}(2017)Hao, Mu, Hong, Wang, An, and Goulermas}]{Hao2017}
+HAO~Y, MU~T, HONG~R, et~al.
+\newblock {Stochastic Multiview Hashing for Large-Scale Near-Duplicate Video
+  Retrieval}\allowbreak[J].
+\newblock IEEE Transactions on Multimedia, 2017, 19\penalty0 (1):\penalty0
+  1-14.
+
+\bibitem[{Hua {\bibetal}(2013)Hua, Xiao, and Liu}]{Hua2013}
+HUA~Y, XIAO~B, LIU~X.
+\newblock {NEST: Locality-aware approximate query service for cloud
+  computing}\allowbreak[J].
+\newblock Proceedings - IEEE INFOCOM, 2013:\penalty0 1303-1311.
+
+\bibitem[{Kornblum(2006)}]{Kornblum2006}
+KORNBLUM~J.
+\newblock {Identifying almost identical files using context triggered piecewise
+  hashing}\allowbreak[J].
+\newblock Digital Investigation, 2006, 3\penalty0 (SUPPL.):\penalty0 91-97.
+
+\bibitem[{Lei {\bibetal}(2013)Lei, Sapra, Shen, and Lin}]{Lei2013Cooperative}
+LEI~Y, SAPRA~K, SHEN~H, et~al.
+\newblock Cooperative end-to-end traffic redundancy elimination for reducing
+  cloud bandwidth cost\allowbreak[J].
+\newblock 2013.
+
+\bibitem[{Li {\bibetal}(2017{\natexlab{a}})Li, Cheng, Wang, Morstatter,
+  Trevino, Tang, and Liu}]{Li2017a}
+LI~J, CHENG~K, WANG~S, et~al.
+\newblock {Feature Selection: A Data Perspective}\allowbreak[J].
+\newblock ACM Computing Surveys, 2017, 50\penalty0 (6):\penalty0 1-45.
+
+\bibitem[{Li {\bibetal}(2014)Li, Schliep, and Hopper}]{Li2014}
+LI~S, SCHLIEP~M, HOPPER~N.
+\newblock {Facet: Streaming over Videoconferencing for Censorship
+  Circumvention.}\allowbreak[J/OL].
+\newblock Wpes, 2014:\penalty0 163-172.
+\newblock
+  \url{http://dl.acm.org/citation.cfm?doid=2665943.2665944{\%}0Ahttp://doi.acm.org/10.1145/2665943.2665944{\%}5Cnpapers3://publication/doi/10.1145/2665943.2665944}.
+
+\bibitem[{Li {\bibetal}(2017{\natexlab{b}})Li, Zheng, Zhang, Li, Guo, and
+  Xu}]{Li2017}
+LI~X, ZHENG~C, ZHANG~C, et~al.
+\newblock {AppTwins: A new approach to identify app package in network
+  traffic}\allowbreak[J].
+\newblock 2017 8th International Conference on Information and Communication
+  Systems, ICICS 2017, 2017:\penalty0 222-227.
+
+\bibitem[{Lumezanu {\bibetal}(2010{\natexlab{a}})Lumezanu, Guo, Spring, and
+  Bhattacharjee}]{Lumezanu2010}
+LUMEZANU~C, GUO~K, SPRING~N, et~al.
+\newblock {The effect of packet loss on redundancy elimination in cellular
+  wireless networks}\allowbreak[J/OL].
+\newblock Proceedings of ACM IMC, 2010\penalty0 (January):\penalty0 294.
+\newblock \url{http://dl.acm.org/citation.cfm?id=1879141.1879179}.
+
+\bibitem[{Lumezanu {\bibetal}(2010{\natexlab{b}})Lumezanu, Guo, Spring, and
+  Bhattacharjee}]{Lumezanu2010The}
+LUMEZANU~C, GUO~K, SPRING~N, et~al.
+\newblock The effect of packet loss on redundancy elimination in cellular
+  wireless networks\allowbreak[J].
+\newblock 2010.
+
+\bibitem[{Ma {\bibetal}(2009)Ma, Saul, Savage, and Voelker}]{Ma2009}
+MA~J, SAUL~L~K, SAVAGE~S, et~al.
+\newblock {Beyond Blacklists : Learning to Detect Malicious Web Sites from
+  Suspicious URLs}\allowbreak[J/OL].
+\newblock World Wide Web Internet And Web Information Systems, 2009:\penalty0
+  1245-1253.
+\newblock \url{http://portal.acm.org/citation.cfm?id=1557153}.
+
+\bibitem[{Mogul {\bibetal}(2004)Mogul, Chan, and Kelly}]{Mogul2004a}
+MOGUL~J~C, CHAN~Y~M, KELLY~T.
+\newblock {Design, implementation, and evaluation of duplicate transfer
+  detection in HTTP}\allowbreak[J].
+\newblock Proceedings of USENIX NSDI, 2004\penalty0 (March):\penalty0 4.
+
+\bibitem[{Mohammad {\bibetal}(2013)Mohammad, Thabtah, and
+  Mccluskey}]{Mohammad2013}
+MOHAMMAD~R~M, THABTAH~F, MCCLUSKEY~L.
+\newblock {Phishing Websites Features}\allowbreak[J/OL].
+\newblock Ieee, 2013\penalty0 (May):\penalty0 1-7.
+\newblock
+  \url{papers3://publication/uuid/6A553382-D05D-48FA-97AA-382C3203BB1F}.
+
+\bibitem[{Reed {\biband} Klimkowski(2016)Reed and Klimkowski}]{Reed2016}
+REED~A, KLIMKOWSKI~B.
+\newblock {Leaky Streams}\allowbreak[J].
+\newblock 2016:\penalty0 1114-1119.
+
+\bibitem[{Reed {\biband} Kranch(2017)Reed and Kranch}]{Reed2017}
+REED~A, KRANCH~M.
+\newblock {Identifying HTTPS-Protected Netflix Videos in
+  Real-Time}\allowbreak[J/OL].
+\newblock Proceedings of the Seventh ACM on Conference on Data and Application
+  Security and Privacy - CODASPY '17, 2017:\penalty0 361-368.
+\newblock \url{http://dl.acm.org/citation.cfm?doid=3029806.3029821}.
+
+\bibitem[{Rhea {\bibetal}(2003)Rhea, Liang, and Brewer}]{Rhea2003}
+RHEA~S~C, LIANG~K, BREWER~E.
+\newblock {Value-Based Web Caching}\allowbreak[J].
+\newblock 2003\penalty0 (May).
+
+\bibitem[{Rimmer {\bibetal}(2017)Rimmer, Preuveneers, Juarez, {Van Goethem},
+  and Joosen}]{Rimmer2017}
+RIMMER~V, PREUVENEERS~D, JUAREZ~M, et~al.
+\newblock {Automated Website Fingerprinting through Deep
+  Learning}\allowbreak[J/OL].
+\newblock 2017.
+\newblock
+  \url{http://arxiv.org/abs/1708.06376{\%}0Ahttp://dx.doi.org/10.14722/ndss.2018.23105}.
+
+\bibitem[{Sahoo {\bibetal}(2017{\natexlab{a}})Sahoo, Liu, and Hoi}]{Sahoo2017}
+SAHOO~D, LIU~C, HOI~S~C~H.
+\newblock {Malicious URL Detection using Machine Learning: A
+  Survey}\allowbreak[J/OL].
+\newblock 2017:\penalty0 1-21.
+\newblock \url{http://arxiv.org/abs/1701.07179}.
+
+\bibitem[{Sahoo {\bibetal}(2017{\natexlab{b}})Sahoo, Liu, and
+  Hoi}]{Sahoo2017Malicious}
+SAHOO~D, LIU~C, HOI~S~C~H.
+\newblock Malicious url detection using machine learning: A
+  survey\allowbreak[J].
+\newblock 2017.
+
+\bibitem[{Sanadhya {\bibetal}(2012)Sanadhya, Sivakumar, Kim, Congdon,
+  Lakshmanan, and Singh}]{Sanadhya2012}
+SANADHYA~S, SIVAKUMAR~R, KIM~K~H, et~al.
+\newblock {Asymmetric Caching: Improved Network Deduplication for Mobile
+  Devices}\allowbreak[J/OL].
+\newblock Mobicom, 2012:\penalty0 161.
+\newblock
+  \url{http://dl.acm.org/citation.cfm?id=2348565{\%}5Cnhttp://dl.acm.org/citation.cfm?doid=2348543.2348565}.
+
+\bibitem[{sandvine(2018)}]{PhenomenaReport}
+SANDVINE.
+\newblock 2018-internet-phenomena-report\allowbreak[R/OL].
+\newblock 2018.
+\newblock \url{https://www.sandvine.com/2018-internet-phenomena-report}.
+
+\bibitem[{Shih {\biband} Karger(2004)Shih and Karger}]{Shih2004}
+SHIH~L~K, KARGER~D~R.
+\newblock {Using urls and table layout for web classification
+  tasks}\allowbreak[J/OL].
+\newblock Proceedings of the 13th conference on World Wide Web - WWW '04,
+  2004:\penalty0 193.
+\newblock \url{http://portal.acm.org/citation.cfm?doid=988672.988699}.
+
+\bibitem[{Song {\bibetal}(2011)Song, Yang, and Huang}]{Song2011}
+SONG~J, YANG~Y, HUANG~Z.
+\newblock {Multiple feature hashing for real-time large scale near-duplicate
+  video retrieval}\allowbreak[J/OL].
+\newblock Proceedings of the 19th {\ldots}, 2011:\penalty0 423-432.
+\newblock \url{http://dl.acm.org/citation.cfm?id=2072354}.
+
+\bibitem[{Spring {\biband} Wetherall(2000)Spring and Wetherall}]{Spring2000}
+SPRING~N~T, WETHERALL~D.
+\newblock {A protocol-independent technique for eliminating redundant network
+  traffic}\allowbreak[J].
+\newblock Sigcomm, 2000, 30\penalty0 (4):\penalty0 87-95.
+
+\bibitem[{Store {\biband} Algorithm(2013)Store and Algorithm}]{Store2013}
+STORE~A~R~C, ALGORITHM~B~R.
+\newblock {Advanced Prediction-Based System for Cloud Bandwidth and Cost
+  Reduction}\allowbreak[J].
+\newblock 2013, 8491:\penalty0 224-226.
+
+\bibitem[{Tan {\bibetal}(2018)Tan, Zhang, Liu, Liu, Zhu, and Dou}]{Tan2018}
+TAN~G, ZHANG~P, LIU~Q, et~al.
+\newblock {Adaptive Malicious URL Detection: Learning in the Presence of
+  Concept Drifts}\allowbreak[J].
+\newblock Proceedings - 17th IEEE International Conference on Trust, Security
+  and Privacy in Computing and Communications and 12th IEEE International
+  Conference on Big Data Science and Engineering, Trustcom/BigDataSE 2018,
+  2018:\penalty0 737-743.
+
+\bibitem[{Tang {\biband} Wang(2017)Tang and Wang}]{Tang2017}
+TANG~P, WANG~Z.
+\newblock {Classification of Internet Video Traffic Using}\allowbreak[J].
+\newblock 2017\penalty0 (978).
+
+\bibitem[{Vastel {\bibetal}(2018)Vastel, Inria, Laperdrix, Rudametkin, Inria,
+  Rouvoy, Iuf, Vastel, Laperdrix, and Rouvoy}]{Vastel2018a}
+VASTEL~A, INRIA~I, LAPERDRIX~P, et~al.
+\newblock {Fp-Scanner : The Privacy Implications of Browser Fingerprint
+  Inconsistencies}\allowbreak[J].
+\newblock USENIX Security, 2018.
+
+\bibitem[{Wang {\bibetal}(2014)Wang, Zhao, Hoi, and Jin}]{Wang2014}
+WANG~J, ZHAO~P, HOI~S~C, et~al.
+\newblock {Online feature selection and its applications}\allowbreak[J].
+\newblock IEEE Transactions on Knowledge and Data Engineering, 2014,
+  26\penalty0 (3):\penalty0 698-710.
+
+\bibitem[{Wang {\bibetal}(2015)Wang, Li, Deng, Zhang, and Feng}]{Wang2015}
+WANG~J, LI~G, DENG~D, et~al.
+\newblock {Two birds with one stone: An efficient hierarchical framework for
+  top-k and threshold-based string similarity search}\allowbreak[J].
+\newblock Proceedings - International Conference on Data Engineering, 2015,
+  2015-May:\penalty0 519-530.
+
+\bibitem[{Wei {\bibetal}()Wei, Jiang, Zhou, and Feng}]{Wei}
+WEI~J, JIANG~H, ZHOU~K, et~al.
+\newblock {MAD2 : A Scalable High-Throughput Exact Deduplication Approach for
+  Network Backup Services}\allowbreak[J].
+
+\bibitem[{Winter {\bibetal}(2013)Winter, Schneider, and Yannikos}]{Winter2013}
+WINTER~C, SCHNEIDER~M, YANNIKOS~Y.
+\newblock {F2S2: Fast forensic similarity search through indexing piecewise
+  hash signatures}\allowbreak[J/OL].
+\newblock Digital Investigation, 2013, 10\penalty0 (4):\penalty0 361-371.
+\newblock \url{http://dx.doi.org/10.1016/j.diin.2013.08.003}.
+
+\bibitem[{Wu {\bibetal}()Wu, Yu, and Wolf}]{Wu}
+WU~K~L, YU~P~S, WOLF~J~L.
+\newblock {Segment-Based Proxy Caching of Multimedia Streams}\allowbreak[J].
+
+\bibitem[{Xiao {\bibetal}(2017)Xiao, Xue, Miao, Li, Chen, Wu, Li, and
+  Zhou}]{Xiao2017}
+XIAO~W, XUE~J, MIAO~Y, et~al.
+\newblock {Tux2: Distributed Graph Computation for Machine
+  Learning}\allowbreak[J/OL].
+\newblock Nsdi, 2017:\penalty0 669-682.
+\newblock
+  \url{https://www.usenix.org/conference/nsdi17/technical-sessions/presentation/xiao}.
+
+\bibitem[{Yu {\biband} Liu(2004)Yu and Liu}]{Yu2004a}
+YU~L, LIU~H.
+\newblock {Efficient Feature Selection via Analysis of Relevance and
+  Redundancy}\allowbreak[J/OL].
+\newblock J. Mach. Learn. Res., 2004, 5:\penalty0 1205-1224.
+\newblock \url{http://dl.acm.org/citation.cfm?id=1005332.1044700}.
+
+\bibitem[{Yu {\bibetal}()Yu, Sapra, Shen, and Ye}]{Yu}
+YU~L, SAPRA~K, SHEN~H, et~al.
+\newblock {Cooperative End-to-End Tra ffi c Redundancy Elimination for Reducing
+  Cloud Bandwidth Cost}\allowbreak[J].
+
+\bibitem[{Zhang {\bibetal}(2018)Zhang, Jin, Ratnasamy, Wawrzynek, and
+  Lee}]{Zhang2018}
+ZHANG~B, JIN~X, RATNASAMY~S, et~al.
+\newblock {AWStream}\allowbreak[J/OL].
+\newblock Proceedings of the 2018 Conference of the ACM Special Interest Group
+  on Data Communication - SIGCOMM '18, 2018:\penalty0 236-252.
+\newblock \url{http://dl.acm.org/citation.cfm?doid=3230543.3230554}.
+
+\bibitem[{Zhang {\bibetal}(2017)Zhang, Ananthanarayanan, Bodik, Philipose,
+  Bahl, and Freedman}]{Zhang2017}
+ZHANG~H, ANANTHANARAYANAN~G, BODIK~P, et~al.
+\newblock {Live video analytics at scale with approximation and
+  delay-tolerance}\allowbreak[J/OL].
+\newblock Proceedings of the 14th USENIX Conference on Networked Systems Design
+  and Implementation, 2017:\penalty0 377-392.
+\newblock \url{https://dl.acm.org/citation.cfm?id=3154661}.
+
+\bibitem[{Zheng {\bibetal}(2018)Zheng, Li, Liu, Sun, and
+  Fang}]{zheng2018hashing}
+ZHENG~C, LI~X, LIU~Q, et~al.
+\newblock Hashing incomplete and unordered network
+  streams\allowbreak[C]//\allowbreak
+IFIP International Conference on Digital Forensics.
+\newblock Springer, 2018: 199-224.
+
+\bibitem[{Zohar {\bibetal}(2014)Zohar, Cidon, and Mokryn}]{Zohar2014}
+ZOHAR~E, CIDON~I, MOKRYN~O.
+\newblock {PACK: Prediction-based cloud bandwidth and cost reduction
+  system}\allowbreak[J].
+\newblock IEEE/ACM Transactions on Networking, 2014, 22\penalty0 (1):\penalty0
+  39-51.
+
+\end{thebibliography}

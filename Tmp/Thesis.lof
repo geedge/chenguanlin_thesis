@@ -1,0 +1,25 @@
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces PACK网络冗余检测结果\relax }}{3}{figure.caption.9}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces 基于内容分块原理\relax }}{6}{figure.caption.10}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces 多线程传输场景\relax }}{13}{figure.caption.12}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 典型的决策树结构图\relax }}{17}{figure.caption.13}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 用户发出第一次请求\relax }}{20}{figure.caption.14}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 用户再次请求\relax }}{21}{figure.caption.15}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 特征选择的框架\relax }}{21}{figure.caption.16}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 所有音视频大小分布\relax }}{24}{figure.caption.17}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 完整度80\%音视频大小分布\relax }}{25}{figure.caption.19}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 基于流式模糊哈希的重复音视频检测方法流程图\relax }}{32}{figure.caption.23}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 音视频文件编号流程图\relax }}{33}{figure.caption.24}
+\addvspace {10.0pt}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 面向网络流量的重复音视频实时检测系统框架图\relax }}{37}{figure.caption.28}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 系统测试原理\relax }}{38}{figure.caption.29}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 完整度80\%文件数去重\relax }}{39}{figure.caption.31}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 完整度95\%文件数去重\relax }}{39}{figure.caption.32}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 完整度80\%文件带宽去重\relax }}{40}{figure.caption.33}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 完整度95\%文件带宽去重\relax }}{40}{figure.caption.34}
+\addvspace {10.0pt}
+\addvspace {10.0pt}
+\addvspace {10.0pt}

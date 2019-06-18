@@ -1,0 +1,82 @@
+This is BibTeX, Version 0.99d (TeX Live 2018/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: ./Tmp/Thesis.aux
+The style file: Biblio/gbt7714-plain.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: Biblio/library.bib
+Repeated entry---line 494 of file Biblio/library.bib
+ : @article{Tan2018
+ :                 ,
+I'm skipping whatever remains of this entry
+Warning--empty key in CNNIC2018
+Warning--empty year in Yu
+Warning--empty year in Aggarwal
+Warning--empty key in aoli2010
+Warning--empty year in Feng
+Warning--empty year in Wu
+Warning--empty year in Wei
+Warning--empty journal in Aggarwal
+Warning--empty year in Aggarwal
+Warning--empty journal in Aggarwal2010EndRE
+Warning--empty journal in Anand2010Cheap
+Warning--empty journal in Feng
+Warning--empty year in Feng
+Warning--empty journal in Feng2013How
+Warning--empty journal in Lei2013Cooperative
+Warning--empty journal in Lumezanu2010The
+Warning--empty journal in Reed2016
+Warning--empty journal in Rhea2003
+Warning--empty journal in Rimmer2017
+Warning--empty journal in Sahoo2017
+Warning--empty journal in Sahoo2017Malicious
+Warning--empty journal in Store2013
+Warning--empty journal in Tang2017
+Warning--empty journal in Wei
+Warning--empty year in Wei
+Warning--empty journal in Wu
+Warning--empty year in Wu
+Warning--empty journal in Yu
+Warning--empty year in Yu
+You've used 57 entries,
+            4429 wiz_defined-function locations,
+            1263 strings with 17945 characters,
+and the built_in function-call counts, 335337 in all, are:
+= -- 4595
+> -- 39617
+< -- 51023
++ -- 14048
+- -- 673
+* -- 2899
+:= -- 46386
+add.period$ -- 187
+call.type$ -- 57
+change.case$ -- 538
+chr.to.int$ -- 12653
+cite$ -- 143
+duplicate$ -- 1307
+empty$ -- 2988
+format.name$ -- 1270
+if$ -- 86198
+int.to.chr$ -- 5
+int.to.str$ -- 1
+missing$ -- 0
+newline$ -- 313
+num.names$ -- 277
+pop$ -- 18279
+preamble$ -- 1
+purify$ -- 333
+quote$ -- 0
+skip$ -- 34489
+stack$ -- 0
+substring$ -- 13775
+swap$ -- 131
+text.length$ -- 549
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 963
+warning$ -- 29
+while$ -- 786
+width$ -- 0
+write$ -- 824
+(There was 1 error message)

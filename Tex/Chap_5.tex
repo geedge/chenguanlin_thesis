@@ -1,0 +1,87 @@
+\chapter{系统设计与实现}\label{chap:introduction}
+
+本章介绍面向网络流量的重复音视频实时检测系统的概述和测试。
+
+\section{系统概述}
+
+系统的输入是在线的网络音视频流量。整个系统由两个模块组成，重复文件实时检测和文件标识评价，整个系统的实现框架图如图~\ref{fig:systemframework}~所示：
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{systemframework}
+    \bicaption{面向网络流量的重复音视频实时检测系统框架图}{multimedia repeated files detection system framework}
+    \label{fig:systemframework}
+\end{figure}
+
+当音视频流量传输时，该系统会生成一个具有预测性的文件标识，并在数据集中进行查询，若该标识在数据集中查询到，则告知内容分析模块文件重复，若在数据集中查询不到该标识，数据集记录新生成的文件标识。该系统在生成标识的同时，抽取10\%的音视频文件，计算其流式模糊哈希值并记录。文件标识评价模块会通过记录下的流式模糊哈希值对文件标识进行评价，优化文件标识的生成。
+
+\section{系统测试}
+
+\subsection{测试原理}
+测试环境是在国内某公司网关，对音视频流量进行分光，流量副本通过整个重复音视频文件实时检测系统，并与原始流量进行对比。测试原理如图~\ref{fig:test}~所示。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{test}
+    \bicaption{系统测试原理}{System test principle}
+    \label{fig:test}
+\end{figure}
+
+\subsection{特定音视频文件召回率测试}
+对内容分析模块返回的特定音视频文件数进行对比并计算召回率，以检测整个重复音视频文件实时检测系统对内容分析模块的影响。其结果如表~\ref{tab:contentanalysis}~:
+\begin{table}[!htbp]
+    \bicaption{内容分析模块特定音视频文件召回率}{Specific multimedia files recall}
+    \label{tab:contentanalysis}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lc}
+        \hline
+        完整度&特定音视频文件召回率\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+        80\%&99.4\%\\
+        95\%&94.7\%\\
+        \hline
+    \end{tabular}
+\end{table}
+
+根据实验结果，经过重复音视频文件实时检测系统的流量内容分析模块特定音视频文件召回率高于95\%，因此，去重机制未影响内容分析模块准确性。
+
+\subsection{系统去重效果测试}
+接着又对整个系统的去重效果进行了测试其结果如下：
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{result_a}
+    \bicaption{完整度80\%文件数去重}{Deduplication rate by file number(file transfer completeness 80\%)}
+    \label{fig:result_a}
+\end{figure}
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{result_b}
+    \bicaption{完整度95\%文件数去重}{Deduplication rate by file number(file transfer completeness 95\%)}
+    \label{fig:result_b}
+\end{figure}
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{result_c}
+    \bicaption{完整度80\%文件带宽去重}{Deduplication rate by file size(file transfer completeness 80\%)}
+    \label{fig:result_c}
+\end{figure}
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{result_d}
+    \bicaption{完整度95\%文件带宽去重}{Deduplication rate by file size(file transfer completeness 95\%)}
+    \label{fig:result_d}
+\end{figure}
+
+如图~\ref{fig:result_a}~所示，完整度80\%的文件数平均的去重率约为65\%，文件数的去重率=发现的重复文件数/总文件数。如图~\ref{fig:result_b}~所示，完整度95\%的文件数平均的去重率约为59\%。如图~\ref{fig:result_c}~所示，完整度80\%的文件的带宽去重率约为22\%，文件带宽的去重率=去重后带宽/未去重带宽。如图~\ref{fig:result_d}~所示，完整度95\%的文件数平均的去重率约为21.4\%。可见系统的去重效果显著，可以减少内容分析机20\%的带宽消耗和对60\%文件的重复分析。
+
+\section{小结}
+本章首先介绍了整个重复音视频文件实时检测系统的概述，并对该系统对特定音视频文件的召回率和去重效果进行了测试。系统的去重机制未影响内容分析模块准确性，且去重效果显著，文件数去重率约为60\%以上，带宽去重率约为20\%。
+

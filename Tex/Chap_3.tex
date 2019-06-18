@@ -1,0 +1,310 @@
+\chapter{预测性文件标识生成方法}\label{chap:introduction}
+
+本章首先简要介绍相应的背景知识，接着使用传统的机器学习方法预测文件的重复性，然后详细说明最终采用的生成预测性文件标识方案。
+
+\section{背景知识}
+
+\subsection{决策树}
+
+决策树是一种类似于流程图的树结构，其中每一个非树叶节点可以认为其是数据集中的一个属性上的测试，决策树的每一个分支代表一个测试的结果，每个树的树叶节点存放着一个类的标号，树的最高的顶层节点是根节点，一个典型的决策树的模型如图~\ref{fig:Typicaldecision}~所示。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{Typicaldecision}
+    \bicaption{典型的决策树结构图}{Typical decision tree}
+    \label{fig:Typicaldecision}
+\end{figure}
+
+决策树的构建不需要任何领域的知识和参数设定，所以非常适合用于探索式的知识发现。
+% J.Ross Quinlan等人开发了ID3决策树算法，此项工作扩展了E.B Hunt等人的工作。而Quinlan等人后来提出了C4.5决策树。
+所有的决策树都采用了类似于贪心算法的思想，绝大多数的决策树分类算法都采用了自上而下的递归算法去构建整个树的结构。随着决策树不断地构建，用于训练决策树的训练集会不断地减少，下面介绍介绍一下决策树地归纳算法。
+
+用三个参数D，attribute list和attribute selection method对决策树进行训练。参数D是数据分区。一开始，其是已经标注过地数据集的全集，参数attribute list用于标识整个标注数据集的属性列表，attribute selection method参数用于标识整个标注数据集属性的启发过程，该过程的思想是贪心算法，用属性选择度量最好的属性进行分类。属性选择的度量方法有很多种，如信息增益和基尼系数等。属性选择的度量方法会导致决策树的树形结构有所不同，比如使用基尼系数其生成的树形结构一定是二叉树。
+
+树的生成从节点N开始，N也是标注数据集D中的一个训练数据集，如果训练集D中的数据其所有的属性是同一类，则节点N变成该决策树的叶子节点，并用其所标注的属性来标记它。如果训练集D中的数据其所有的属性不是同一类，则调用attribute selection method方法，对训练集D进行分裂属性，选择度量会告诉我们如何对训练集进行划分。
+
+常见的分裂准则有信息增益、基尼系数等，例如经典的ID3决策树就使用了信息增益作为属性选择度量。
+
+\subsection{贝叶斯分类方法}
+
+贝叶斯分类方法是一种统计学分类方法。它可以预测类隶属关系的概率，如给定的元组属于一个特定类的概率。
+
+对于给定的$X$的属性描述，找出元组$X$属于类$C$的概率。$P(X|H)$是后验概率，相反的，$P(H)$为先验概率，或者称之为$H$的先验概率。类似的，$P(X|H)$是条件$H$下，$X$的后验概率。
+
+贝叶斯定理提供了一种由$P(X)$、$P(H)$和$P(X|H)$计算后验概率$P(H|X)$的方法贝叶斯定理见公式~\ref{eq:phx}~：
+
+\begin{equation} \label{eq:phx}
+P(H|X) = \left(\frac{P(X|H)P(H)}{P(X)}\right)
+\end{equation}
+
+用向量$X={x_n}$标识每个元组的n维属性
+朴素贝叶斯分类的流程如下：
+
+假设由一个$m$个类的分类方式，其中的类别分别用$C_1$，$C_2$，…，$C_m$表示，给定元组$X$，朴素贝叶斯分类方法将预测$X$属于具有最高后验概率的类（在条件$X$下）。换句话说，朴素贝叶斯分类方法预测$X$属于类$C_i$，当且仅当$P(C_i|X)>P(C_j|X)$，然后根据上面提到的贝叶斯定理最大化$P(C_i|X)$。
+
+由于$P(X)$对于所有的类来说是一个常数，所以仅仅需要$P(X|C_i)P(C_i)$最大即可。若类的先验概率未知，则通常假设这些类都是等概率的。也就是说$P(C_1)=P(C_2)= … =P(C_m)$,并以此为依据对$P(X|C_i)$做最大化估计。由于给定了许多属性的数据集，想要计算$P(X|C_i)$的值，需要消耗大量的时间，为了能够降低$P(X|C_i)$计算时所消耗的资源，遂对计算进行简化。可以用类条件独立的朴素假定，将$P(X|C_i)$的计算简化成公式~\ref{eq:pxc}~:
+
+\begin{equation} \label{eq:pxc}
+P(X|C_i) = \prod_{k=1}^nP\left(P(X_k|C_i)\right)
+\end{equation}
+
+\subsection{URL}
+URL是统一资源定位符，通俗的理解就是互联网上的邮编地址，可以在全世界范围内对你所访问的资源进行唯一的标记。URL可以从一个特定的服务器来获取资源。大多数URL会遵循一种标准，这种标准包含以下三个方面：URL的第一个部分是指所访问的资源类型所使用的协议，目前大多数的网站使用的是HTTP协议，或者由HTTP+SSL组成的HTTPS。第二个部分是网址，如www.baidu.com。剩下的部分则指向了服务器上的所要访问的资源。随着交互式网页应用的网页开发技术Ajax等技术的兴起，越来越多的网站采用动态URL技术，使得互联网上的同一资源，往往有几个不同的URL。
+% 这也使得对于URL很多情况下无法对同一资源进行唯一标识。
+\subsection{HTTP缓存}
+% 接着介绍一下HTTP的缓存，
+不同的用户在访问互联网上的同一资源时，服务器会多次传输同一份文件，每次通过网络传输给用户，会消耗大量的网络资源，也会造成整个互联网数据的拥塞。所以HTTP协议采用了许多与网络缓存相关的技术。让用户缓存一个服务器资源的副本，这样就可以节约许多带宽资源。
+
+HTTP缓存有以下优点：1）减少了网络流量的冗余传输，节约了大量的网络带宽。2）加快了用户的访问速度，可以很快的加载已经缓存的页面。3）减少了原始服务器的载荷，使得服务器可以更快地响应用户的请求，也可以避免服务器过载现象的出现。4）降低了整个网络的时延，可以较快地访问较远的资源。
+
+然而，原始服务器中的资源可能随着时间的推移发生改变，这里就提到了一个再验证的概念，其表示用户会不断的对其缓存的副本是否过时进行检测。为了有效的进行副本的再验证，HTTP也对其定义了一些特殊的请求。其中HTTP的条件方法可以高效地进行再验证。HTTP允许缓存向原始服务器发送一个条件GET请求，当原始服务器发现其缓存的副本已经过时，才会向请求端返回一个对象主体。HTTP一共定义了5个条件请求部首，其中和缓存相关的有两条，分别是If-Modified-Since和If-None-Match。其中If-Modified-Since对应的标签是LastModified，而If-None-Match对应的是Etag标签，当原始服务器端的资源发生变化时，服务器会返回一个新的资源和该资源的相应的新的Etag标签和一个LastModified标签。
+
+如图~\ref{fig:Flowchartofrequest_fi}~为用户发送第一次请求的流程图，如图~\ref{fig:Flowchartofrequest_ag}~为用户再次发送请求。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{Flowchartofrequest_fi}
+    \bicaption{用户发出第一次请求}{Flowchart of the first request from the user}
+    \label{fig:Flowchartofrequest_fi}
+\end{figure}
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{Flowchartofrequest_ag}
+    \bicaption{用户再次请求}{Flowchart of the second request from the user}
+    \label{fig:Flowchartofrequest_ag}
+\end{figure}
+
+\subsection{特征选择}
+特征选择是一种的数据预处理过程，对于许多高维度空间的样本来说，用大量的特征属性构建机器学习模型会消耗许多资源，所以需要通过特征选择，删除或者合并冗余的特征，选取出尽可能小的特征子集。整个特征选择的框架如图~\ref{fig:Frameworkforfeature}~所示。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{Frameworkforfeature}
+    \bicaption{特征选择的框架}{Framework of feature selection}
+    \label{fig:Frameworkforfeature}
+\end{figure}
+
+特征选择分为基于搜索策略划分的特征选择方法和基于评价准则划分的特征选择方法。基于评价准则划分的特征选择方法分为过滤式的特征选择方法和包裹式的特征选择方法，其主要的区别在于是否和后续的机器学习算法有关。过滤式的特征选择算法与后续的机器学习算法无关。
+
+过滤式的特征选择算法一般通过一些相关统计量对特征的重要性进行度量，主要采用的的度量标准分为以下几类：距离度量、信息度量、一致性度量和依赖性度量，本文主要采用的度量标准是信息度量和依赖性度量。
+
+包裹式的特征选择方法将学习器的最终结果作为评价的重要指标，使整个样本集针对学习器的不同进行更有个性的优化，达到特征选择的目的。
+
+\subsection{信息熵}
+1948年著名的学者香农第一次提出信息熵的概念，以解决对不同信息的量化度量问题。香农认为任何信息都会存在不同程度的冗余，只是大小问题。一个信息源的冗余取决于其每个符号（数字、单词或者字母）的不确定性。一般来说，对于一个信号源，其出现不同的符号概率越大，则其熵越大。
+
+下面给出信息熵的公式~\ref{eq:H(U)}~：
+
+\begin{equation} \label{eq:H(U)}
+H(U) =  -\sum_{i=1}^{n}p_i\log_{10}p_i
+\end{equation}
+
+其中$U$表示信息源，$P_i$表示信息源中每一个符号出现的概率。从机器学习的角度说，一个属性的信息熵反映了该属性所包含的信息量的大小。信息熵越大则说明其包含的信息越多。
+
+\subsection{互信息}
+两个随机变量之间的互信息表示两个变量之间依赖关系的强弱，两个属性之间的互信息也是过滤式的特征选择算法的重要评价标准之一。
+
+与其它的相关系数不同，互信息并不仅仅局限于实值随机变量，它的值主要由联合分布 $p(X,Y)$ 以及边缘分布的乘积 $p(X)p(Y)$所以决定的。互信息度量了两个事件之间的相关性。
+
+两个离散型随机变量 $X$ 和$Y$的互信息可以定义为如下：
+
+\begin{equation} \label{eq:I(X;Y)1}
+I(X;Y) =  \sum_{y\in Y}\sum_{x\in X}p(x,y)\log_{10}\left(\frac{p(x,y)}{p(x)p(y)}\right)
+\end{equation}
+
+其中p(x,y)表示$X$和$Y$的联合概率分布函数，$p(x)$和$p(y)$分别是 $X$ 和 $Y$ 的边缘概率分布函数。
+
+在两个随机变量是连续型随机变量的情形下，计算互信息的公式被替换成了二重定积分：
+
+\begin{equation} \label{eq:I(X;Y)2)}
+I(X;Y) = \int_{y}\int_{x}p(x,y)\log_{10}\left(\frac{p(x,y)}{p(x)p(y)}\right)dxdy
+\end{equation}
+
+其中$p(x,y)$当表示$X$和$Y$的联合概率密度分布函数，$p(x)$和$p(y)$分别表示$X$和$Y$的边缘概率密度分布函数。
+
+根据互信息的定义可以看出，互信息表示了两个随机变量$X$和$Y$所共享的信息。例如，如果两个随机变量$X$和$Y$相互独立，则认为随机变量$X$不对$Y$提供任何信息，反之亦然，所以它们之间的互信息的值为零。以上的情况，在特征选择中，属性$X$和属性$Y$都将会被保留。如果随机变量$X$是$Y$的一个线性的函数关系，同时随机变量$Y$也是$X$的一个线性函数，那么$X$和$Y$传递的所有信息被$X$和$Y$共享，可认为随机变量$X$可以决定$Y$的值，反之亦然。这种情况下随机变量$X$和$Y$的信息熵也是相同的。以上这种情况认为随机变量相互依赖。在特征选择中，会去除属性$X$，或者去除属性$Y$。
+
+\section{重复音视频文件预测实验}
+
+\subsection{实验思路}
+使用传统的机器学习方法，对真实环境的音视频文件进行了重复性预测，以此来验证机器学习方法的效果。
+
+\subsection{机器学习算法选择}
+采用朴素贝叶斯和决策树，其原因主要有以下三点：
+
+一是所获取的特征大多数为标称量，很难对其进行量化，且标称量之间的加减没有数学意义。决策树和朴素贝叶斯无需对特征进行数学计算，符合特征主要为标称量的条件。
+
+二是朴素贝叶斯和决策树其模型构建完成后，运算量较小，空间复杂度和时间复杂度符合真实环境对算法高效性的需求。深度学习方法虽然准确度较高，但其需要消耗大量资源，不符合真实环境的需求。
+
+三是决策树的分类器构建不需要任何领域的知识和参数设定，所以非常适合用于探索式的知识发现。
+
+\subsection{实验数据}
+数据集是从国内某公司网关收集的3天真实网络流量，共约450万条音视频数据，整个实验数据的文件大小分布如图~\ref{fig:Allaudio}~。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{Allaudio}
+    \bicaption{所有音视频大小分布}{Files size distribution}
+    \label{fig:Allaudio}
+\end{figure}
+
+数据集一共包含15个特征，分别包含了URL，ServerIP，LastModified，Etag，MediaLen，MediaType，音视频文件头部内容1K一直到32K（已经通过MD5进行哈希）。具体的特征如表~\ref{tab:DatasetFeatures}~所示：
+\begin{table}[!htbp]
+    \bicaption{数据集特征}{Dataset features}
+    \label{tab:DatasetFeatures}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{ll}
+        \hline
+       特征&描述\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+        URL&统一资源定位符\\
+        ServerIP&服务器IP\\
+        LastModified&   LastModified标识\\
+        Etag&Etag标识\\
+        MediaLen&音视频文件的长度\\
+        MediaType&音视频文件的格式\\
+        1K、2K、4K…..32K（6个)&音视频文件头部nK的MD5值\\
+        SFH&流式模糊哈希值\\
+        SFH\_len&流式模糊哈希值长度\\
+        \hline
+    \end{tabular}
+\end{table}
+
+上章提到，由于人们的观看习惯，例如拖动在线视频的进度条，或者手动关闭视频网页，导致网络中传输的音视频文件常常会出现缺损。对于缺损严重的文件模糊哈希值也无法判断其是否相似。本文用完整度来表示一个文件的缺损程度，完整度100\%意味着文件无缺损。完整度=所有流式模糊哈希的右偏移减去左偏移量/实际总文件长度（流式模糊哈希的右偏移量和左偏移量定义见上章2.1）。
+
+由于对于完整度较低的文件，模糊哈希值也无法判断其是否相似，因此实验数据选取完整度80\%的文件，共297万条，更高的文件完整度代表该流量将经过更加彻底的分析，整个实验数据的完整度80\%文件分布如图~\ref{fig:80sizedistribution}~：
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{80sizedistribution}
+    \bicaption{完整度80\%音视频大小分布}{Files size distribution(file transfer completeness 80\%)}
+    \label{fig:80sizedistribution}
+\end{figure}
+
+\subsection{数据标注}
+将所有音视频文件的哈希值存储到相似性查找系统中，若该哈希值在系统中找到与该流量相似的摘要，则认为其重复，若在系统中找不到与该流量相似的摘要，则认为其不重复。
+
+\subsection{机器学习库}
+采用的机器学习库是基于python的sklearn，选用sklearn主要有以下原因：
+1）sklearn是一种简单有效的机器学习工具，支持大部分的机器学习算法，减少了使用者对算法库的学习成本。2）sklearn可在各种环境中重复使用，对硬件要求较低。3）sklearn是基于NumPy，SciPy和matplotlib构建的，NumPy等是Python语言的扩展程序库，支持大量的维度数组与矩阵运算。因此使用sklearn可以减少使用者对高纬度的数据集进行处理的成本。
+
+\subsection{特征量化}
+选择的特征和其特征量化方式见表~\ref{tab:Selectedfeatures}~：
+\begin{table}[!htbp]
+    \bicaption{所选特征和其特征量化方式}{Selected features}
+    \label{tab:Selectedfeatures}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{ll}
+        \hline
+        HTTP头部信息&量化方式\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+        URL&n-gram\\
+        ServerIP&按8位分割\\
+        MediaTpye&保留原格式\\
+        MediaLen&保留原格式\\
+        Etag&CRC32\\
+        Last-Modified&CRC32\\
+        \hline
+    \end{tabular}
+\end{table}
+
+根据\cite{Sahoo2017Malicious}的论文，通过n-gram的方式对URL提取特征，大量应用于恶意URL分析领域。因此，本文对于URL的特征提取也使用n-gram，并分别尝试了n=3，4，5，6，7的情况。
+
+根据\cite{Tan2018},考虑到观看视频的ServerIP地址和地域之间可能存在的关系，ServerIP地址采用了8位分割。
+
+Etag和Last-Modified采用了CRC32进行哈希，作为一个标量信息处理。之所以采用CRC32是因为使用的机器学习库sklearn最多支持32位的标称量。
+
+\subsection{实验结果}
+采用了交叉验证，随机选取80\%的数据作为训练集，剩下的20\%的数据作为测试集。通过决策树和朴素贝叶斯对音视频文件的重复性进行了预测。
+
+最终的结果为决策树预测是否重复的准确率为68\%，召回率为55\%。朴素贝叶斯的准确率为16\%，召回率为18\%。其主要原因是，音视频流量报文头部的特征较少，与缓存相关的特征大多数为标称量，很难提供较为有用的信息，且由于在内存集约的环境下工作，无法对音视频文件头部进行编解码从而获取编解码后视频的帧信息，使得有用的特征大大减少。
+
+最终采用通过生成音视频文件标识的方式，对文件的重复性进行检测。
+
+\section{预测性文件标识生成}
+通过重复音视频文件预测实验，对使用机器学习方法来预测网络流量中的音视频文件是否重复进行了探索，其结果证明，决策树和朴素贝叶斯等传统的机器学习方法其预测结果的准确率和召回率不理想。需要一种新的方法对在网络流量中的重复音视频文件进行预测。
+
+最终决定使用文件标识的方式对重复的音视频文件进行检测。本段将介绍预测性文件标识的生成，在下章将详细介绍基于流式模糊哈希的重复音视频检测方法。
+
+\subsection{步骤}
+在音视频流量刚刚建立传输开始时，选取音视频流量头部的如Etag，Last-Modified等和缓存相关的一些特征，以及文件头部的一些信息，最后通过MD5等哈希算法生成一个具有预测性的文件标识。
+
+\subsection{特征选择评价标准}
+音视频流量复杂，每种音视频流量其特征也不完全相同。由于一些原始服务器并不支持HTTP缓存，有些音视频流量并不含有Etag和LastModfy等特征，这对音视频流量的特征选取增加了许多挑战，那么如何建立一套行之有效的音视频流量特征评价体系，量化的评价特征的效果？
+
+本文采用过滤式的特征选择方式，其原因主要有以下两点：
+
+一是包裹式选择方式需要训练学习器，使用机器学习方法，但根据上文的实验，传统的机器学习方法无法满足真实环境要求，所以无法使用包裹式的选择方法。
+
+二是选取的音视频流量头部特征多为标称量，过滤式的选择方式其许多评价标准可以适用于对标称量的评价，符合使用环境。
+
+采用了两个度量指标，一是信息熵。信息熵表示一个属性的随机性，信息熵越大表明该属性随机性越强，包含的信息越多。二是互信息。互信息表示两个属性之间的依赖关系的强弱，使用互信息的目的是降低属性的维度，减少获取的属性的数量，选取的属性其之间的互信息越小越好。
+
+\subsection{实验数据}
+与重复音视频文件预测实验数据集相同。
+
+\subsection{音视频特征的信息熵}
+信息熵计算实验结果如表~\ref{tab:CharacteristicInformation}~所示：
+\begin{table}[!htbp]
+    \bicaption{特征信息熵结果}{Features information entropy results}
+    \label{tab:CharacteristicInformation}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{ll|ll}
+        \hline
+       特征&信息熵& 特征&信息熵\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+        音视频文件头部内容32K&14.47&Etag&14.19\\
+        音视频文件头部内容16K&14.42&Last-Modified&13.69\\
+        音视频文件头部内容8K&14.38&MediaLen&12.17\\
+        音视频文件头部内容4K&14.36&URL&10.57\\
+        音视频文件头部内容2K&14.34&ServerIP&7.17\\
+        音视频文件头部内容1K&14.32&MediaType&1.9\\
+        \hline
+    \end{tabular}
+\end{table}
+
+根据实验结果，文件头部内容的信息熵要高于音视频流量报文特征的信息熵。URL这一特征其熵之所以非常低，是因为由于捕获环境的单向流影响，大量的音视频流量是源服务器的应答流量无法获取URL，大部分的URL特征为None，导致URL的熵较低。MediaType的信息熵很低为1.9，因此在生成文件标识时，不使用此特征。最终通过信息熵的结果，筛选出生成文件标识的候选特征为：音视频文件头部内容32K、Etag、Last-Modified、MediaLen、URL、ServerIP。
+
+\subsection{音视频特征的互信息}
+互信息的计算较为复杂，随着数据集规模的增加，其呈指数型增长。因此从原始的数据集中随机抽取了50万条音视频数据。
+
+参与互信息计算的特征只有Etag、Last-Modified、MediaLen、URL和ServerIP一共5个特征。其原因如下：1）  以上5个特征其信息熵较高，可见其含有的信息量较大。2）  对于不同长度的音视频文件内容头部，根据常识，其有较强的相关性。所以只选取了信息熵最大的一个。
+
+互信息的计算结果如表~\ref{tab:Featuremutual}~所示:
+\begin{table}[!htbp]
+    \bicaption{特征互信息结果}{Features mutual information result}
+    \label{tab:Featuremutual}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{ll|ll}
+        \hline
+       特征&互信息&特征&互信息\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+         Etag，Last-Modified&0.94&Last-Modified，URL&0.24\\
+        Etag，MediaLen&0.42&Last-Modified，ServerIP&0.35\\
+        Etag，URL&0.25&MediaLen，URL&0.37\\
+        Etag，ServerIP&0.34&MediaLen，ServerIP&0.39\\
+        Last-Modified，MediaLen&0.42&URL，ServerIP&0.23\\
+        \hline
+    \end{tabular}
+\end{table}
+
+根据互信息的实验结果，Etag和Last-Modified之间相关性较强，其互信息为0.94，选择其中一个作为候选特征即可。一共选取了Etag、MediaLen、URL、ServerIP四个特征作为计算音视频文件标识的基础，并改变选取的音视频文件内容长度nk生成6个不同的文件标识。在下章将对这些文件标识的效果进行评估，最后选取一个合适的文件标识。
+\section{小结}
+本章首先介绍了决策树、朴素贝叶斯、和HTTP缓存等相关的背景知识。接着介绍了重复音视频文件预测实验，在实验中对使用机器学习方法来预测网络流量中的音视频文件是否重复进行了探索，最终的结果为决策树和朴素贝叶斯等传统的机器学习方法其预测结果的准确率和召回率不理想。最后介绍了预测性文件标识，选取音视频流量头部的一些特征生成一个具有预测性的文件标识，并通过熵和互信息对生成标识的特征进行筛选，最后生成了6个不同的文件标识，在下章我们将评估这些文件标识的效果。

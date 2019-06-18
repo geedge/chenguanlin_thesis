@@ -1,0 +1,145 @@
+\chapter{基于流式模糊哈希的重复音视频检测方法}\label{chap:introduction}
+
+本章首先介绍相关背景知识，接着介绍了基于流式模糊哈希的重复音视频检测方法和如何生成文件编号，然后详细介绍评价标识所采用的标准，最后通过实验证明了预测性音视频文件标识的效果。
+
+\section{背景知识}
+
+% \subsection{网络路由}
+% % 在介绍单项流之前先介绍什么是网络路由，
+% 网络路由是指分组从源到目的地时，决定端到端路径的网络范围的进程。路由工作在OSI参考模型第三层——网络层的数据包转发设备。路由器通过转发数据包来实现网络互连。路由器通常连接两个或多个由IP子网或点到点协议标识的逻辑端口，至少拥有1个物理端口。路由器根据收到数据包中的网络层地址以及路由器内部维护的路由表决定输出端口以及下一跳地址，并且重写链路层数据包头实现转发数据包。路由器通过动态维护路由表来反映当前的网络拓扑，并通过网络上其他路由器交换路由和链路信息来维护路由表。如图\ref{fig:route}为典型的Windows路由表
+% \begin{figure}[!htbp]
+%     \centering
+%     %trim option's parameter order: left bottom right top
+%     \includegraphics[width=0.60\textwidth]{route}
+%     \bicaption{路由表}{route table}
+%     \label{fig:route}
+% \end{figure}
+\subsection{单向流}
+路由的不对称性在整个网络中是普遍存在的。对于每个网络上的节点，会根据当前网络的情况和目的IP独立地选择不同的路由路径，但由于多条等价路由或者负载均衡等因素的影响，路由的不对称性是一种无法避免的现象。如果两个端点之间传输的数据包其上行和下行之间的物理链路是相同的（即经过网络转发设备顺序是逆序相等的），则它们是路由对称的。否则称为不对称路由。在物理链路上只能观察到上行或者下行数据包的网络流，称之为单向流。单向流是不对称流量的一种，通常对单向流下行数据包的处理无法获取其访问的URL等信息。
+
+\subsection{流式模糊哈希相似不具有传递性}
+% 上文提到了流式模糊哈希采用存储中间计算结果的方法进行流式数据摘要计算，能够处理数据缺损、乱序和重叠的情况，并且采用伽罗华域（Galois Field）的乘法运算作为强哈希算法减少内存占用，使得本算法能够在内存集约的情况下实时计算流式数据摘要。但流式模糊哈希值有一定的缺陷性。
+由于网络中音视频流量的不完整传输，流式模糊哈希值计算的音视频文件的完整度往往较低，无法对完整度较低的文件进行彻底的分析。因此流式模糊哈希值之间的相似不具有传递性。举个例子，H1，H2，H3分别是同一个音视频文件的模糊哈希值，但由于用户的观看习惯，它们分别对应的完整度不同，分别是80\%，100\%和80\%。H1和H2相似，H2和H3相似，但H1和H3不相似。其原因是H1和H3的两个音视频文件完整度较低，导致其编辑距离较低。该特性对下面介绍的文件编号的计算和漏报误报的统计产生了巨大的影响。
+
+\section{基于流式模糊哈希的重复音视频检测方法}
+\subsection{步骤}
+% 上文提到了预测性文件标识的生成，那如何对重复音视频进行检测呢？步骤如下，
+在音视频传输刚刚建立时，生成音视频文件标识，若在数据集中查询到该文件标识，则认为该音视频文件重复，并告知内容分析模块无需继续进行内容审计，若未能在数据集中查询到该标识，则认为该文件不重复，数据库记录该音视频文件的标识和内容分析模块的审计结果。
+
+在查询文件标识的同时，该方法也会计算文件的流式模糊哈希值，用以生成文件编号，文件编号是文件标识评价的关键参数之一。文件标识评价采用两个指标，分别为漏报率和误报率。文件编号、误报率和漏报率的计算将在下文详细说明。
+
+整个思路的具体流程如图~\ref{fig:Flowchartofpredictiveprogram}~所示。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.80\textwidth]{Flowchartofpredictiveprogram}
+    \bicaption{基于流式模糊哈希的重复音视频检测方法流程图}{Flow chart of Repeated multimedia detection method}
+    \label{fig:Flowchartofpredictiveprogram}
+\end{figure}
+
+\subsection{音视频文件编号}
+% 在介绍整个预测性文件标识的评价体系前，先要介绍一下文件编号的生成，
+文件编号是一个基准值，对于同一个文件其文件编号相同，文件编号由流式模糊哈希值生成。
+
+文件编号计算的思路如下：主要是通过流式模糊哈希，将相似的音视频文件赋予相同的文件编号，前文提到过流式模糊哈希的相似不具有传递性，因此需要选出一个合适的流式模糊哈希值作为基准。例如在上文提到的例子若以H1和H3作为基准模糊哈希值，则会出现两个不同的音视频文件编号。若以H2作为基准模糊哈希值，则只出现唯一的音视频文件编号。因此，需要找到一个基准的流式模糊哈希值，再对文件进行编号。
+
+基准的哈希值应为完整度最高的音视频流量所生成的哈希值。若完整度最高的基准流量摘要存在多条，则选取与其他流量相似度之和最高的哈希值。
+
+下面是计算文件编号的具体步骤如下：
+
+步骤一：将该段时间产生的所有音视频流量的模糊哈希值存入基于流式模糊哈希的相似性查找系统，n=1。
+
+步骤二：获取第n条哈希值，若发现其已经有音视频标识则n=n+1，再次执行步骤二，否则执行步骤三。
+
+步骤三：将第n条哈希值在系统中查询，获取所有相似的音视频，并在这些相似的音视频中获取基准流式模糊哈希值，再次查询该基准流式模糊哈希值，其结果打上音视频标识n。若为最后一条执行结束计算，否则n=n+1，执行步骤二。
+
+如图~\ref{fig:numberflow}~为整个音视频文件编号的流程图。
+\begin{figure}[!htbp]
+    \centering
+    %trim option's parameter order: left bottom right top
+    \includegraphics[width=0.60\textwidth]{numberflow}
+    \bicaption{音视频文件编号流程图}{multimedia file number generate}
+    \label{fig:numberflow}
+\end{figure}
+
+\subsection{预测性文件标识评价}
+
+本文采用基于流式模糊哈希值的方法对文件标识进行评价，采用两个评价指标：一是漏报率，漏报率=漏报的音视频文件数/总音视频文件数。这里的漏报是指：预测性文件标识不相同，但文件编号相同。二是误报率，误报率=误报的音视频文件数/总音视频文件数。这里的误报是指：预测性文件标识相同，但文件编号不同。由于代理服务器等网络中间件有着色情检测、版权保护的作用，因此对于重复音视频文件检测系统来说，其误报率要比漏报率重要。
+
+\section{重复音视频检测方法的可行性验证}
+
+使用上文提到的数据集，使用完整度80\%以上的数据对第3章最后生成的6个文件标识的效果进行了验证，计算它们的误报率和漏报率。
+
+\subsection{预测性文件标识的误报率}
+
+误报的定义是预测性文件标识相同，但文件编号不同，其结果如表~\ref{tab:Resultsoffalse}~所示。
+\begin{table}[!htbp]
+    \bicaption{误报率结果}{Results of false positive rate}
+    \label{tab:Resultsoffalse}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lccccccc}
+        \hline
+       音视频文件头部nK生成的标识&0K&1K&2K&4K&8K&16K&32K\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+        误报率&16.8\%&7.4\%&3.2\%&1.4\%&0.8\%&0.39\%&0.34\%\\
+        \hline
+    \end{tabular}
+\end{table}
+
+当生成标识的音视频文件头部内容增加到32k，文件标识的误报率降低到0.34\%，远远高于传统的机器学习方法的准确率。随着选取的音视频文件头部的长度越来越长，其误报率呈下降趋势。这样的结果也验证了随着熵的增高，其特征的效果越好的设想，因此信息熵是一种较好的评价文件标识的标准。
+
+\subsection{预测性文件标识的漏报率}
+漏报的定义是预测性文件标识不相同，但文件编号相同，其结果如表~\ref{tab:Resultsoffalse}~:
+
+\begin{table}[!htbp]
+    \bicaption{漏报率结果}{Results of missing rate}
+    \label{tab:ResultsofMissing}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lccccccc}
+        \hline
+       音视频文件头部nK生成的标识&0K&1K&2K&4K&8K&16K&32K\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+         漏报率&67\%&66\%&65\%&66\%&66\%&65\%&62\%\\
+        \hline
+    \end{tabular}
+\end{table}
+
+随着获取的音视频文件头部的长度越来越长，其漏报率也呈下降趋势，但趋势并不明显，当选取的文件头部内容长度已经达到32K时，但其漏报率依旧高达62\%。这又是什么原因呢？
+
+通过对漏报数据的观察，发现大量的出现漏报的音视频数据其Etag和LastModified标签相同，主要其ServerIP地址不同。这可能是因为某些大型网站使用了CDN服务，同一音视频资源在网络环境中存在多个ServerIP不同的镜像。同时目前很多网站式URL是动态生成的，其不同的URL会标记相同的视频资源，文件标识的生成选取URL作为特征也可能是漏报率较高的原因。
+
+本文上章提到过，由于单向流的影响，很多音视频流量无法获取其URL，或者获取URL的开销极大。同时很多网站式URL是动态生成的，如果能够在生成文件标识时，不采用URL作为候选特征，将减少网络中间件单向流对准的开销。
+
+为了解漏报率产生的原因，同时减少网络中间件单向流对准的开销，本文重新生成了三个音视频标识，并计算其漏报率，三个标识分别是：去除ServerIP的文件标识，去除URL的标识，和同时去除URL和ServerIP的标识，三个标识的音视频文件头部长度都为32K。实验结果如表~\ref{tab:PredictiveDocument}~所示：
+\begin{table}[!htbp]
+    \bicaption{漏报率结果}{Missing rate results}
+    \label{tab:PredictiveDocument}
+    \centering
+    \footnotesize% fontsize
+    \setlength{\tabcolsep}{4pt}% column separation
+    \renewcommand{\arraystretch}{1.2}%row space 
+    \begin{tabular}{lcc}
+        \hline
+       文件标识&误报率&漏报率\\
+        %\cline{2-9}% partial hline from column i to column j
+        \hline
+		去除ServerIP的文件标识&0.32\%&10\% \\
+		去除URL的文件标识&0.37\%&60\% \\
+		去除ServerIP和URL的文件标识&0.35\%&7\% \\
+        \hline
+    \end{tabular}
+\end{table}
+
+根据实验结果，去除ServerIP的文件标识比未去除ServerIP的文件标识漏报率降低了约50\%，误报率并未发生明显变化，可见ServerIP作为生成文件标识的特征是漏报率高达60\%的主要原因，生成预测性文件标识时不应该把ServerIP作为候选特征。同时，去除ServerIP和URL的文件标识其误报率和漏报率未发生明显变化，且大大减少了网络中间件单向流对准的开销，因此通过实验得出了最优的文件标识候选特征，分别为Etag、MediaLen、Last-Modified、头部文件32K（其中Etag和Last-Modified任选其一）。
+
+根据上文的音视频特征的信息熵计算结果显示，ServerIP和URL其信息熵低。这也验证了随着熵的增高，其特征的效果越好的设想。
+\section{小结}
+本章首先介绍了单向流相关的背景知识，指出了流式模糊哈希不具有传递性及其对文件编号计算的影响。然后介绍了基于流式模糊哈希的重复音视频检测方法，使用文件标识对音视频文件进行重复性检测的同时计算该音视频的流式模糊哈希值以生成文件编号。接着提出了两个文件标识的评价标准：漏报率和误报率。最后对文件标识的效果进行了验证，结果证明生成音视频文件标识的特征效果最好的是：Etag、MediaLen、Last-Modified、头部文件32K。
